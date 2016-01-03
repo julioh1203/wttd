@@ -43,7 +43,7 @@ class SubscribeTest(TestCase):
 class SubscribeSuccessPost(TestCase):
     def setUp(self):
         data = {'name':'Julio', 'cpf': '12345678901',
-                'email': 'julioh1203@gmail.com', 'phone': '15-3524-3944'}
+                'email': 'monitoramento@octaltecnologia.com.br', 'phone': '15-3524-3944'}
         self.response = self.client.post('/inscricao/', data)
 
     def test_post(self):
@@ -61,13 +61,13 @@ class SubscribeSuccessPost(TestCase):
 
     def test_subscribe_email_from(self):
         email = mail.outbox[0]
-        expect = 'contato@eventex.com.br'
+        expect = 'monitoramento@octaltecnologia.com.br'
 
         self.assertEqual(email.from_email, expect)
 
     def test_subscribe_email_to(self):
         email = mail.outbox[0]
-        expect = ['julioh1203@gmail.com', 'contato@eventex.com.br']
+        expect = ['monitoramento@octaltecnologia.com.br', 'contato@eventex.com.br']
 
         self.assertEqual(email.to, expect)
 
@@ -76,7 +76,7 @@ class SubscribeSuccessPost(TestCase):
 
         self.assertIn('Julio', email.body)
         self.assertIn('12345678901', email.body)
-        self.assertIn('julioh1203@gmail.com', email.body)
+        self.assertIn('monitoramento@octaltecnologia.com.br', email.body)
         self.assertIn('15-3524-3944', email.body)
 
 
@@ -107,7 +107,7 @@ class SubscribeInvalidPost(TestCase):
 class SubscribeSuccessfulMessage(TestCase):
     def test_message(self):
         data = {'name':'Julio', 'cpf': '12345678901',
-                'email': 'julioh1203@gmail.com', 'phone': '15-3524-3944'}
+                'email': 'monitoramento@octaltecnologia.com.br', 'phone': '15-3524-3944'}
         response = self.client.post('/inscricao/', data, follow=True)
 
         self.assertContains(response, 'Inscrição realizada com sucesso!')
